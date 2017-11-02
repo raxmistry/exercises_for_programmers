@@ -14,7 +14,8 @@ defmodule Chapter2.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      applications: [:cowboy, :ranch]
     ]
   end
 
@@ -23,7 +24,9 @@ defmodule Chapter2.Mixfile do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
-      {:mix_test_watch, "~> 0.3", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
+      {:cowboy, "~>1.1.2"},
+      {:plug, "1.4.3"}
     ]
   end
 end

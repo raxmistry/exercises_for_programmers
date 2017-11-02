@@ -6,7 +6,7 @@ defmodule RetireTest do
   end 
   
   test "should output message when you can already retire" do
-    assert Retire.years_to_retire(65, 25) == :ok 
+    assert Retire.years_to_retire(65, 25) == :error
   end 
 
   test "should return year of retirement" do

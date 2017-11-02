@@ -1,4 +1,6 @@
 defmodule Chapter2 do
+  import Plug.Conn
+
   @moduledoc """
   Documentation for Chapter2.
   """
@@ -8,8 +10,24 @@ defmodule Chapter2 do
 
   ## Examples
 
-
   """
+  def start(_type, _args) do
+        dispatch_config = build_dispatch_config
+        { :ok, _ } = :cowboy.start_http(:http,
+                                            100,
+                                           [{:port, 8080}],
+                                           [{ :env, [{:dispatch, dispatch_config}]}])
+  end
+
+  def init(options), do: options
+
+  def call(conn, _opts) do
+    conn 
+    |> put_resp_content_type("text/plain")
+    |> send_resp(200, "Hello world\n")
+  end
+
+
   def hello(name) do
     "Hello, #{name}, nice to meet you!"
   end

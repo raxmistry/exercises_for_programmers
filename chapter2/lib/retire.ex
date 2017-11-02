@@ -6,6 +6,7 @@ defmodule Retire do
 
   def years_to_retire(age, retirement_age) when retirement_age < age do
     IO.puts "You can already retire!!"
+    :error
   end
 
   def calc_retirement do 
@@ -16,10 +17,13 @@ defmodule Retire do
     {retirement_age, _} = Integer.parse(retirement_age_string)
 
     years_to_retire = years_to_retire(age, retirement_age)
+    if (years_to_retire == :error) do
+
     current_year = Date.utc_today.year
     year_of_retirement = year_of_retirement(current_year, years_to_retire)
 
     output_message(current_year, years_to_retire, year_of_retirement)
+    end
   end 
 
   def year_of_retirement(current_year, years_to_retire) do
