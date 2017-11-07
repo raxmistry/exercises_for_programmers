@@ -1,0 +1,18 @@
+<html>
+	<title>An elixir static page</title>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		This is an example static page
+		<p></p>
+	</body>
+	<script>
+		$(document).ready(function() {
+			$.get("/test", function(data) {
+				$("p").text(data);
+				console.log("finished function");
+			});
+		}); 
+	</script>
+</html>
