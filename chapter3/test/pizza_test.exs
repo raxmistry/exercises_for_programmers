@@ -36,4 +36,8 @@ defmodule PizzaTest do
   test "should return correct pluralization for 5" do
     assert Pizza.pluralization(5) == "pieces"
   end
+
+  test "should return number of pizzas needed" do
+    assert Pizza.pizzas_needed_for(17, 8) == 3
+  end
 end
