@@ -5,7 +5,7 @@ defmodule Interest do
   def calc_interest(principal, rate, term) do
     normalised_rate = rate / 100
     principal * (1 + normalised_rate * term)
-    #|> Float.ceil(2)
+    |> Float.ceil(2)
   end
 
 
