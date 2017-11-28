@@ -37,13 +37,18 @@ exports.config = {
   // Phoenix paths configuration
   paths: {
     // Dependencies and current project directories to watch
-    watched: ["static", "css", "js", "vendor"],
+    watched: ["static", "css", "js", "vendor", "elm"],
     // Where to compile files to
     public: "../priv/static"
   },
 
   // Configure your plugins
   plugins: {
+    elmBrunch: {
+      elmFolder: "elm",
+      mainModules: ["App.elm"],
+      outputFolder: "priv/static/vendor"
+    },
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
@@ -57,6 +62,7 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    whitelist: ["phoenix", "phoenix_html"]
   }
 };
