@@ -72,6 +72,10 @@ defmodule Temp do
     end
   end
 
+  def result_scales(scale) do
+    @scale_to[scale]
+  end
+
   def convert_temp() do
     scale = get_temp_scale()
     temp = get_input "Please enter the temperature in #{scale}"

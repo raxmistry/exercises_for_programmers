@@ -19,8 +19,11 @@ defmodule Chapter4Web.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Chapter4Web do
-  #   pipe_through :api
-  # end
+  # Should rather use a resource and the page should make an ajax call?
+  scope "/api/temp", Chapter4Web do
+    pipe_through :api
+
+    post "/", TempController, :calc_temp
+  end
+
 end
