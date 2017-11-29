@@ -4,9 +4,8 @@ defmodule Chapter4Web.TempController do
   def calc_temp(conn, params) do
     temp = params["temp"]
     scale = ("from_" <> params["scale"] |> String.to_atom)
+    scale_to = Temp.result_scales(params["scale"])
     val = Temp.convert(temp, scale, :to_kelvin)
-    result = %{}
-    Map.put(result, "kelvin", val)
     json conn |> put_status(:ok), %{"kelvin" => val}
 
   end

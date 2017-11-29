@@ -72,6 +72,19 @@ defmodule Temp do
     end
   end
 
+  def convert_all_service(scale, scale_to, temp) do
+    if (Enum.count(scale_to) >= 1) do 
+      [head|tail] = scale_to
+      from = (("from_" <> Kernel.to_string(scale)) |> String.to_atom)
+      to = (("to_" <> Kernel.to_string(head)) |> String.to_atom)
+
+      converted = %{head => convert(temp, from, to)}
+      Map.merge(converted, convert_all_service(scale, tail, temp))
+    else 
+      %{}
+    end
+  end
+
   def result_scales(scale) do
     @scale_to[scale]
   end

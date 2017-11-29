@@ -24,4 +24,8 @@ defmodule TempTest do
   test "should convert kelvin to fahrenheit" do
     assert Temp.convert(273.15, :from_kelvin, :to_fahrenheit) == 32
   end
+
+  test "should convert temp to all alternatives" do
+    assert Temp.convert_all_service(:celcius, [:kelvin, :fahrenheit], 0) == %{:kelvin => 273.15, :fahrenheit => 32}
+  end
 end
