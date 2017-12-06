@@ -1,77 +1,86 @@
 module App exposing (..)
 
-import Html exposing (Html, button, div, text, program)
-import Html.Events exposing (onClick)
-
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 
 -- MODEL
 
 
 type alias Model =
-    Bool
+        {
+                scale : String
+                , inputTemp : Int
+                , celciusTemp : Int
+                , kelvinTemp : Int
+                , fahrenheitTemp : Int
+        }
 
-
-init : ( Model, Cmd Msg )
-init =
-    ( False, Cmd.none )
-
+model = 
+        { scale = "Metric"
+        , inputTemp = 0
+        , celciusTemp = 0
+        , kelvinTemp = 0
+        , fahrenheitTemp = 0
+        }
 
 
 -- MESSAGES
 
+type Scale 
+        = Celcius
+        | Fahrenheit
+        | Kelvin
 
 type Msg
-    = Expand
-    | Collapse
-
-
+        = SetScale String
+        | SetTemp String 
 
 -- VIEW
 
-
 view : Model -> Html Msg
 view model =
-    if model then
+        let 
+            scales = 
+                    [Celcius, Fahrenheit, Kelvin]
+        in
         div []
-            [ button [ onClick Collapse ] [ text "Collapse" ]
-            , text "Widget"
+            [ text "Please select the temperature scale?" 
+            , select [ onInput SetScale ] 
+                ( scaleList )
+            , br [] []
+            , text "Please enter the temperature: "
+            , input [ placeholder "temperature", onInput SetTemp ] []
+            , br [] []
+            , text (String.concat["Temperature in Celcius: ", (toString model.celciusTemp) ])
+            , br [] []
+            , text (String.concat["Temperature in Fahrenheit: ", (toString model.fahrenheitTemp) ])
+            , br [] []
+            , text (String.concat["Temperature in Kelvin: ", (toString model.kelvinTemp) ])
             ]
-    else
-        div []
-            [ button [ onClick Expand ] [ text "Expand" ] ]
 
-
-
+scaleList : List (Html msg) 
+scaleList =
+        [ option [ value "Celcius" ] [text "Metric"] 
+        , option [ value "Fahrenheit" ] [ text "Imperial" ] 
+        , option [ value "Kelvin" ] [ text "Kelvin" ] ]
 -- UPDATE
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
-    case msg of
-        Expand ->
-            ( True, Cmd.none )
-
-        Collapse ->
-            ( False, Cmd.none )
-
-
-
--- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
-
-
+        case msg of 
+                SetScale value ->
+                        { model | scale = value}
+                SetTemp value ->
+                        { model | inputTemp = (Result.withDefault 0 (String.toInt value)) }
 
 -- MAIN
 
 
 main =
-    program
-        { init = init
+    beginnerProgram
+        { model = model
         , view = view
         , update = update
-        , subscriptions = subscriptions
         }
