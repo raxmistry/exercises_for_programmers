@@ -8,10 +8,16 @@ import (
 )
 
 func main() {
-	fmt.Print("What is the input string?")
 	reader := bufio.NewReader(os.Stdin)
-	text, _ := reader.ReadString('\n')
-	trimmed := strings.TrimSuffix(text, "\n")
+	trimmed := ""
+	for {
+		fmt.Print("What is the input string?")
+		text, _ := reader.ReadString('\n')
+		trimmed = strings.TrimSuffix(text, "\n")
+		if len(trimmed) > 0 {
+			break
+		}
+	}
 	chars := strings.Split(trimmed, "")
 	fmt.Printf("%s has %d characters", trimmed, len(chars))
 
