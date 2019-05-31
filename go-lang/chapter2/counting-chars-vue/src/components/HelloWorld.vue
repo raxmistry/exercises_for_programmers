@@ -66,7 +66,8 @@ a {
 }
 input {
     padding: 10px;
-    font: 2em;
+    font-size: 1em;
+    font-family: inherit;
 }
 p {
     padding: 30px 5px 5px 10px;
@@ -74,13 +75,13 @@ p {
     font-weight: bold;
 }
 .left-pad {
-    margin: 5% 30 5% 30%;
+    margin: 5% 30% 5% 30%;
 }
 .right-pad {
-    margin: 5% 30 5% 30%;
+    margin: 5% 30% 5% 30%;
 }
 .result {
-    background-color: MidnightBlue;
+    background-color: DarkBlue;
     color: white;
     border-radius: 5px;
 }
